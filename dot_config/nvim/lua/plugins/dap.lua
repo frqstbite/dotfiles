@@ -1,0 +1,20 @@
+return {
+	'jay-babu/mason-nvim-dap.nvim',
+	dependencies = { 'mason-org/mason.nvim', 'mfussenegger/nvim-dap' },
+	opts = {	
+		'bash-debug-adapter',
+		--'systemdlint',
+		--'xmlformatter',
+		--'yamlfix',
+		'cpptools',
+		'csharpier',
+		'dart-debug-adapter',
+		'fixjson',
+		'java-debug-adapter',
+		'js-debug-adapter',
+		'prettier',
+		'prettierd',
+		'rustfmt',
+		'shfmt',
+	},
+}

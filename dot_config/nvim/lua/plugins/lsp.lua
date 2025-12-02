@@ -1,0 +1,51 @@
+
+return {
+	'mason-org/mason-lspconfig.nvim',
+	dependencies = {'mason-org/mason.nvim', 'neovim/nvim-lspconfig'},
+	opts = {
+		automatic_enable = true,
+		ensure_installed = {
+			'astro',
+			'bashls',
+			'biome',
+			'cmake',
+			'csharp_ls',
+			'css_variables',
+			'cssls',
+			'cssmodules_ls',
+			'dartls',
+			'dotls',
+			'eslint',
+			'gdscript',
+			'gdshader_lsp',
+			'gh_actions_ls',
+			'glsl_analyzer',
+			'glslls',
+			'gradle_ls',
+			'html',
+			'java_language_server',
+			'jsonls',
+			'luau_lsp',
+			'markdown_oxide',
+			'mdx_analyzer',
+			'pylsp',
+			'rust_analyzer',
+			'selene3p_ls',
+			'spyglassmc_language_server',
+			'stylint_lsp',
+			'stylua',
+			'systemd_ls',
+			'ts_ls',
+			'vimlw',
+			'vue_ls',
+			'yamlls',
+		},
+        handlers = {
+            function(server_name)
+                vim.lsp.config(server_name, {
+                    capabilities = require('cmp_nvim_lsp').default_capabilities(),
+                })
+            end,
+        },
+	},
+}
