@@ -1,0 +1,4 @@
+# when leaving the console clear the screen to increase privacy
+if type -p clear &>/dev/null; then
+  clear
+fi

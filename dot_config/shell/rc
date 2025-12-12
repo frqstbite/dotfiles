@@ -1,0 +1,5 @@
+
+# History
+export LESSHISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/less/history"
+export NODE_REPL_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/node/history"
+export LUNE_REPL_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/lune/history"

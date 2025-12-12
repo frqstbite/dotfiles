@@ -1,0 +1,2 @@
+# ~/.bash_logout
+[ -r "$XDG_CONFIG_HOME/shell/logout" ] && . "$XDG_CONFIG_HOME/shell/logout"
