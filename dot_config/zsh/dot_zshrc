@@ -10,7 +10,7 @@ fi
 
 export ZSH_CONFIG="${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"
 export ZSH_STATE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
-mkdir -p ZSH_CONFIG ZSH_STATE
+mkdir -p $ZSH_CONFIG $ZSH_STATE
 
 export ZSH="${XDG_CONFIG_HOME:-$HOME/.config}/.oh-my-zsh"
 export ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/.zcompdump"
