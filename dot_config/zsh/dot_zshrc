@@ -9,7 +9,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 export ZSH_CONFIG="${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"
-export ZSH="$ZSH_CONFIG/.oh-my-zsh"
+export ZSH_STATE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
+mkdir -p ZSH_CONFIG ZSH_STATE
+
+export ZSH="${XDG_CONFIG_HOME:-$HOME/.config}/.oh-my-zsh"
 export ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/.zcompdump"
 
 DISABLE_AUTO_UPDATE="true"
@@ -71,7 +74,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
+HISTFILE="$ZSH_STATE/history"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
