@@ -1,3 +1,7 @@
 # ~/.config/shell/env
 
+# PATH
+[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH" # User's private bin
+[ -f "$HOME/.rokit/env" ] && . "$HOME/.rokit/env"          # Rokit
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"          # Cargo
 

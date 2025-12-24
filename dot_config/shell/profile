@@ -15,11 +15,6 @@ export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
 export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 export XDG_STATE_HOME="${XDG_STATE_HOME:-$HOME/.local/state}"
 
-# PATH
-[ -d "$HOME/.local/bin" ] && PATH="$HOME/.local/bin:$PATH" # User's private bin
-[ -f "$HOME/.rokit/env" ] && . "$HOME/.rokit/env"          # Rokit
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"          # Cargo
-
 export XDG_CONFIG_HOME XDG_DATA_HOME XDG_CACHE_HOME XDG_STATE_HOME PATH
 
 # Ensure directories exist (no-op if present)
