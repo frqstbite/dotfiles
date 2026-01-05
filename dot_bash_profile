@@ -1,8 +1,0 @@
-# ~/.bash_profile
-[[ -r "$XDG_CONFIG_HOME/shell/profile" ]] && . "$XDG_CONFIG_HOME/shell/profile"
-
-# Include bashrc if not running interactively because bash is weird
-case $- in
-    *i*) [[ -f "$HOME/.bashrc" ]] && . "$HOME/.bashrc";;
-      *) return;;
-esac

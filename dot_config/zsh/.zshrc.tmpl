@@ -1,20 +1,19 @@
-# ~/.zshrc
-[ -r "$XDG_CONFIG_HOME/shell/rc" ] && . "$XDG_CONFIG_HOME/shell/rc"
+# Include defaults
+. "${XDG_CONFIG_HOME:-{{ .xdg.config }}}/sh/rc"
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  . "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-{{ .xdg.cache }}}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  . "${XDG_CACHE_HOME:-{{ .xdg.cache }}}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export ZSH_CONFIG="${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}"
-export ZSH_STATE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh"
+export ZSH_CONFIG="${ZDOTDIR:-${XDG_CONFIG_HOME:-{{ .xdg.config }}}/zsh}"
+export ZSH_STATE="${XDG_STATE_HOME:-{{ .xdg.state }}}/zsh"
 mkdir -p $ZSH_CONFIG $ZSH_STATE
 
-export ZSH="${XDG_CONFIG_HOME:-$HOME/.config}/.oh-my-zsh"
-export ZSH_COMPDUMP="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/.zcompdump"
-
+export ZSH="${XDG_CONFIG_HOME:-{{ .xdg.config }}}/.oh-my-zsh"
+export ZSH_COMPDUMP="${XDG_CACHE_HOME:-{{ .xdg.cache }}}/zsh/.zcompdump"
 DISABLE_AUTO_UPDATE="true"
 
 # Set name of the theme to load --- if set to "random", it will

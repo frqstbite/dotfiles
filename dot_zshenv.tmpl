@@ -1,0 +1,4 @@
+# Include defaults
+[ -f "${XDG_CONFIG_HOME:-{{ .xdg.config }}}/sh/env" ] && . "${XDG_CONFIG_HOME:-{{ .xdg.config }}}/sh/env"
+
+export ZDOTDIR="${XDG_CONFIG_HOME:-{{ .xdg.config }}}/zsh"

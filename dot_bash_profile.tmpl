@@ -1,0 +1,8 @@
+# Include defaults
+[ -f "${XDG_CONFIG_HOME:-{{ .xdg.config }}}/sh/profile" ] && . "${XDG_CONFIG_HOME:-{{ .xdg.config }}}/sh/profile"
+
+# Include bashrc if not running interactively because bash is weird
+case $- in
+    *i*) [ -f "${HOME:-{{ .chezmoi.homeDir }}}/.bashrc" ] && . "${HOME:-{{ .chezmoi.homeDir }}}/.bashrc";;
+      *) return;;
+esac
