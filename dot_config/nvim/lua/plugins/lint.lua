@@ -1,17 +1,19 @@
 return {
 	'rshkarin/mason-nvim-lint',
 	opts = {
-		'cmakelint',
+		automatic_installation = false,
+        'cmakelint',
 		'cpplint',
 		'eslint_d',
 		'gitlint',
 		'jsonlint',
 		'luacheck',
 		'markdownlint',
+        'selene',
 		'shellcheck',
 		'stylelint',
-		'vint',
+	    'vint',
 		'yamllint',
-	},
+    },
 	dependencies = {'mason-org/mason.nvim', 'mfussenegger/nvim-lint'},
 }

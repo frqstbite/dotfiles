@@ -16,11 +16,15 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Setup
+vim.env.DCMAKE_POLICY_VERSION_MINIMUM = "3.5" --We need some older tools
 require("lazy").setup({
 	spec = {
 		{ import = "plugins" },
 		{ import = "themes" },
 	},
 	install = { colorscheme = { "habamax" } },
-	checker = { enabled = true }, --Automatically check for plugin updates
+	checker = {
+        enabled = true, --Automatically check for plugin updates
+        notify = false, --Disable the "Press any key" notification
+    },
 })
