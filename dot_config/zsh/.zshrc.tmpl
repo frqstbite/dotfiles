@@ -8,12 +8,13 @@ if [[ -r "${XDG_CACHE_HOME:-{{ .xdg.cache }}}/p10k-instant-prompt-${(%):-%n}.zsh
   . "${XDG_CACHE_HOME:-{{ .xdg.cache }}}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+export ZSH="${XDG_CONFIG_HOME:-{{ .xdg.config }}}/.oh-my-zsh"
+export ZSH_CACHE="${XDG_CACHE_HOME:-{{ .xdg.cache }}}/zsh"
+export ZSH_COMPDUMP="${XDG_CACHE_HOME:-{{ .xdg.cache }}}/zsh/.zcompdump"
 export ZSH_CONFIG="${ZDOTDIR:-${XDG_CONFIG_HOME:-{{ .xdg.config }}}/zsh}"
 export ZSH_STATE="${XDG_STATE_HOME:-{{ .xdg.state }}}/zsh"
-mkdir -p $ZSH_CONFIG $ZSH_STATE
+mkdir -p $ZSH_CONFIG $ZSH_STATE $ZSH_CACHE
 
-export ZSH="${XDG_CONFIG_HOME:-{{ .xdg.config }}}/.oh-my-zsh"
-export ZSH_COMPDUMP="${XDG_CACHE_HOME:-{{ .xdg.cache }}}/zsh/.zcompdump"
 DISABLE_AUTO_UPDATE="true"
 
 # Set name of the theme to load --- if set to "random", it will
