@@ -1,10 +1,10 @@
 # Ignore README
 **/README.md
 
-{{ if ne .chezmoi.os "darwin" }}
+{{ if ne .os "darwin" }}
     Library/
 {{ end }}
 
-{{ if ne .chezmoi.os "windows" }}
+{{ if ne .os "windows" }}
     AppData/
 {{ end }}

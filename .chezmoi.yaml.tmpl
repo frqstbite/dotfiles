@@ -1,24 +1,81 @@
-{{- $is_wsl := (and (eq .chezmoi.os "linux") (.chezmoi.kernel.osrelease | lower | contains "microsoft")) -}}
-{{- $is_deck := (and (eq .chezmoi.os "linux") (exists "/usr/bin/steamos-session-select")) -}}
+{{/* Default inputs */}}
+{{ $ring := 3 }}
+{{ $os := .chezmoi.os }}
+{{ $gui := false }}
 
-{{/* Unix XDG */}}
+{{/* Default XDG */}}
 {{ $XDG_BIN := ".local/bin" }}
 {{ $XDG_CACHE := ".cache" }}
 {{ $XDG_CONFIG := ".config" }}
 {{ $XDG_DATA := ".local/share" }}
-{{ $XDG_RUNTIME_DIR := joinPath "/run/user" (env "UID") }}
+{{ $XDG_RUNTIME_DIR := joinPath "/run/user" .chezmoi.uid }}
 {{ $XDG_STATE := ".local/state" }}
 
-{{/* Windows XDG */}}
-{{ if eq .chezmoi.os "windows" }}
+{{/* These decisions must be made by a human */}}
+{{ if not stdinIsATTY }}
+  fail "Setup must be run interactively to configure machine-specific settings."
+{{ end }}
+
+{{/* Prompt trust level
+  * Controls SSH, GPG, secrets, and other sensitive features
+  */}}
+{{ $ring = (promptChoice "\ued25 What security ring does this machine belong to" (list "0 (Personal)" "1 (Workstation)" "2 (Managed)" "3 (Ephemeral)"))
+  | replaceAllRegex "^([[:digit:]]).*$" "$1"
+  | atoi }}
+
+{{/* Confirm linux OS flavor
+  * Controls OS-specific features
+  */}}
+{{ if eq $os "linux" }}
+  {{ $autodetected := false }}
+
+  {{/* Autodetect distro from /etc/os-release and /proc/sys/kernel */}}
+  {{ if or (not empty .chezmoi.osrelease) (not empty .chezmoi.kernel) }}
+    {{ $os_name := cat "running " (.chezmoi.osrelease.prettyName | default "Linux") }}
+    {{ $os_id := .chezmoi.osrelease.id | default "" }}
+    {{ $os_icon := "\uf17c" }}
+
+    {{/* Autodetect WSL */}}
+    {{ if and (contains "microsoft" (.chezmoi.kernel.name | lower)) (not empty (env "WSL_DISTRO_NAME")) }}
+      {{ $os = "wsl" }}
+      {{ $os_name = cat $os_name " on WSL (Windows Subsystem for Linux)" }}
+      {{ $os_icon = "\uf17a" }}
+    
+    {{/* Autodetect steam deck */}}
+    {{ else if and (eq $os_id "steamos") (stat "/usr/bin/steamos-session-select") }}
+      {{ $os = "deck" }}
+      {{ $os_name = "a Steam Deck" }}
+      {{ $os_icon = "\uf1b6" }}
+    {{ end }}
+
+    {{ $autodetected = promptBool (cat $os_icon " Is this machine " $os_name) }}
+  {{ end }}
+
+  {{ if not $autodetected }}
+    {{ $os = (promptChoice "\uf0a9 What operating system is this machine running" (list "Linux (Arch, Debian, Ubuntu...)" "WSL (Windows Subsystem for Linux)" "Deck (SteamOS)"))
+     | lower
+     | replaceAllRegex "^([[:alpha:]]+).*$" "$1" }}
+  {{ end }}
+{{ end }}
+
+{{/* Prompt GUI
+  * Gates GUI-specific features, like fonts and themes
+  */}}
+{{ $gui = not (promptBool "\uf120 Is this a headless machine" true) }}
+
+{{/* Windows */}}
+{{ if eq $os "windows" }}
   {{ $XDG_CACHE = env "TEMP" }}
   {{ $XDG_CONFIG = env "APPDATA" }}
   {{ $XDG_DATA = env "LOCALAPPDATA" }}
-  {{ $XDG_RUNTIME_DIR := env "TEMP" }}
+  {{ $XDG_RUNTIME_DIR = env "TEMP" }}
   {{ $XDG_STATE = env "LOCALAPPDATA" }}
 {{ end }}
 
 data:
+  ring: {{ $ring }}
+  os: {{ $os }}
+  gui: {{ $gui }}
   xdg:
     bin: "{{- joinPath .chezmoi.homeDir $XDG_BIN -}}"
     cache: "{{- joinPath .chezmoi.homeDir $XDG_CACHE -}}"
