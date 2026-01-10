@@ -30,13 +30,13 @@
   {{ $autodetected := false }}
 
   {{/* Autodetect distro from /etc/os-release and /proc/sys/kernel */}}
-  {{ if or (not (empty .chezmoi.osrelease)) (not (empty .chezmoi.kernel)) }}
-    {{ $os_name := cat "running " (.chezmoi.osrelease.prettyName | default "Linux") }}
-    {{ $os_id := .chezmoi.osrelease.id | default "" }}
+  {{ if or (not (empty .chezmoi.osRelease)) (not (empty .chezmoi.kernel)) }}
+    {{ $os_name := cat "running " (.chezmoi.osRelease.prettyName | default "Linux") }}
+    {{ $os_id := .chezmoi.osRelease.id | default "" }}
     {{ $os_icon := "\uf17c" }}
 
     {{/* Autodetect WSL */}}
-    {{ if and (contains "microsoft" (.chezmoi.kernel.name | lower)) (not (empty (env "WSL_DISTRO_NAME"))) }}
+    {{ if and (contains "microsoft" (.chezmoi.kernel.osrelease | lower)) (not (empty (env "WSL_DISTRO_NAME"))) }}
       {{ $os = "wsl" }}
       {{ $os_name = cat $os_name " on WSL (Windows Subsystem for Linux)" }}
       {{ $os_icon = "\uf17a" }}
