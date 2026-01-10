@@ -19,7 +19,7 @@
 {{/* Prompt trust level
   * Controls SSH, GPG, secrets, and other sensitive features
   */}}
-{{ $ring = (promptChoice "\ued25 What security ring does this machine belong to" (list "0 (Personal)" "1 (Workstation)" "2 (Managed)" "3 (Ephemeral)"))
+{{ $ring = (promptChoice "\uf132 What security ring does this machine belong to" (list "0 (Personal)" "1 (Workstation)" "2 (Managed)" "3 (Ephemeral)"))
   | replaceAllRegex "^([[:digit:]]).*$" "$1"
   | atoi }}
 
@@ -31,14 +31,14 @@
 
   {{/* Autodetect distro from /etc/os-release and /proc/sys/kernel */}}
   {{ if or (not (empty .chezmoi.osRelease)) (not (empty .chezmoi.kernel)) }}
-    {{ $os_name := cat "running " (.chezmoi.osRelease.prettyName | default "Linux") }}
+    {{ $os_name := cat "running" (.chezmoi.osRelease.prettyName | default "Linux") }}
     {{ $os_id := .chezmoi.osRelease.id | default "" }}
     {{ $os_icon := "\uf17c" }}
 
     {{/* Autodetect WSL */}}
     {{ if and (contains "microsoft" (.chezmoi.kernel.osrelease | lower)) (not (empty (env "WSL_DISTRO_NAME"))) }}
       {{ $os = "wsl" }}
-      {{ $os_name = cat $os_name " on WSL (Windows Subsystem for Linux)" }}
+      {{ $os_name = cat $os_name "on WSL (Windows Subsystem for Linux)" }}
       {{ $os_icon = "\uf17a" }}
     
     {{/* Autodetect steam deck */}}
@@ -48,7 +48,7 @@
       {{ $os_icon = "\uf1b6" }}
     {{ end }}
 
-    {{ $autodetected = promptBool (cat $os_icon " Is this machine " $os_name) }}
+    {{ $autodetected = promptBool (cat $os_icon "Is this machine" $os_name) }}
   {{ end }}
 
   {{ if not $autodetected }}
