@@ -13,80 +13,80 @@
 
 {{/* These decisions must be made by a human */}}
 {{ if not stdinIsATTY }}
-  fail "Setup must be run interactively to configure machine-specific settings."
+    fail "Setup must be run interactively to configure machine-specific settings."
 {{ end }}
 
 {{/* Prompt trust level
-  * Controls SSH, GPG, secrets, and other sensitive features
-  */}}
+    * Controls SSH, GPG, secrets, and other sensitive features
+    */}}
 {{ $ring = (promptChoice "\uf132 What security ring does this machine belong to" (list "0 (Personal)" "1 (Workstation)" "2 (Managed)" "3 (Ephemeral)"))
-  | replaceAllRegex "^([[:digit:]]).*$" "$1"
-  | atoi }}
+    | replaceAllRegex "^([[:digit:]]).*$" "$1"
+    | atoi }}
 
 {{/* Confirm linux OS flavor
-  * Controls OS-specific features
-  */}}
+    * Controls OS-specific features
+    */}}
 {{ if eq $os "linux" }}
-  {{ $autodetected := false }}
+    {{ $autodetected := false }}
 
-  {{/* Autodetect distro from /etc/os-release and /proc/sys/kernel */}}
-  {{ if or (not (empty .chezmoi.osRelease)) (not (empty .chezmoi.kernel)) }}
-    {{ $os_name := cat "running" (.chezmoi.osRelease.prettyName | default "Linux") }}
-    {{ $os_id := .chezmoi.osRelease.id | default "" }}
-    {{ $os_icon := "\uf17c" }}
+    {{/* Autodetect distro from /etc/os-release and /proc/sys/kernel */}}
+    {{ if or (not (empty .chezmoi.osRelease)) (not (empty .chezmoi.kernel)) }}
+        {{ $os_name := cat "running" (.chezmoi.osRelease.prettyName | default "Linux") }}
+        {{ $os_id := .chezmoi.osRelease.id | default "" }}
+        {{ $os_icon := "\uf17c" }}
 
-    {{/* Autodetect WSL */}}
-    {{ if and (contains "microsoft" (.chezmoi.kernel.osrelease | lower)) (not (empty (env "WSL_DISTRO_NAME"))) }}
-      {{ $os = "wsl" }}
-      {{ $os_name = cat $os_name "on WSL (Windows Subsystem for Linux)" }}
-      {{ $os_icon = "\uf17a" }}
-    
-    {{/* Autodetect steam deck */}}
-    {{ else if and (eq $os_id "steamos") (stat "/usr/bin/steamos-session-select") }}
-      {{ $os = "deck" }}
-      {{ $os_name = "a Steam Deck" }}
-      {{ $os_icon = "\uf1b6" }}
+        {{/* Autodetect WSL */}}
+        {{ if and (contains "microsoft" (.chezmoi.kernel.osrelease | lower)) (not (empty (env "WSL_DISTRO_NAME"))) }}
+            {{ $os = "wsl" }}
+            {{ $os_name = cat $os_name "on WSL (Windows Subsystem for Linux)" }}
+            {{ $os_icon = "\uf17a" }}
+        
+        {{/* Autodetect steam deck */}}
+        {{ else if and (eq $os_id "steamos") (stat "/usr/bin/steamos-session-select") }}
+            {{ $os = "deck" }}
+            {{ $os_name = "a Steam Deck" }}
+            {{ $os_icon = "\uf1b6" }}
+        {{ end }}
+
+        {{ $autodetected = promptBool (cat $os_icon "Is this machine" $os_name) }}
     {{ end }}
 
-    {{ $autodetected = promptBool (cat $os_icon "Is this machine" $os_name) }}
-  {{ end }}
-
-  {{ if not $autodetected }}
-    {{ $os = (promptChoice "\uf0a9 What operating system is this machine running" (list "Linux (Arch, Debian, Ubuntu...)" "WSL (Windows Subsystem for Linux)" "Deck (SteamOS)"))
-     | lower
-     | replaceAllRegex "^([[:alpha:]]+).*$" "$1" }}
-  {{ end }}
+    {{ if not $autodetected }}
+        {{ $os = (promptChoice "\uf0a9 What operating system is this machine running" (list "Linux (Arch, Debian, Ubuntu...)" "WSL (Windows Subsystem for Linux)" "Deck (SteamOS)"))
+        | lower
+        | replaceAllRegex "^([[:alpha:]]+).*$" "$1" }}
+    {{ end }}
 {{ end }}
 
 {{/* Prompt GUI
-  * Gates GUI-specific features, like fonts and themes
-  */}}
+    * Gates GUI-specific features, like fonts and themes
+    */}}
 {{ $gui = not (promptBool "\uf120 Is this a headless machine" true) }}
 
 {{/* Windows */}}
 {{ if eq $os "windows" }}
-  {{ $XDG_CACHE = env "TEMP" }}
-  {{ $XDG_CONFIG = env "APPDATA" }}
-  {{ $XDG_DATA = env "LOCALAPPDATA" }}
-  {{ $XDG_RUNTIME_DIR = env "TEMP" }}
-  {{ $XDG_STATE = env "LOCALAPPDATA" }}
+    {{ $XDG_CACHE = env "TEMP" }}
+    {{ $XDG_CONFIG = env "APPDATA" }}
+    {{ $XDG_DATA = env "LOCALAPPDATA" }}
+    {{ $XDG_RUNTIME_DIR = env "TEMP" }}
+    {{ $XDG_STATE = env "LOCALAPPDATA" }}
 {{ end }}
 
 data:
-  ring: {{ $ring }}
-  os: {{ $os }}
-  gui: {{ $gui }}
-  xdg:
-    bin: "{{- joinPath .chezmoi.homeDir $XDG_BIN -}}"
-    cache: "{{- joinPath .chezmoi.homeDir $XDG_CACHE -}}"
-    config: "{{- joinPath .chezmoi.homeDir $XDG_CONFIG -}}"
-    data: "{{- joinPath .chezmoi.homeDir $XDG_DATA -}}"
-    runtime_dir: "{{- joinPath .chezmoi.homeDir $XDG_RUNTIME_DIR -}}"
-    state: "{{- joinPath .chezmoi.homeDir $XDG_STATE -}}"
-    relative:
-      bin: "{{- $XDG_BIN -}}"
-      cache: "{{- $XDG_CACHE -}}"
-      config: "{{- $XDG_CONFIG -}}"
-      data: "{{- $XDG_DATA -}}"
-      runtime_dir: "{{- $XDG_RUNTIME_DIR -}}"
-      state: "{{- $XDG_STATE -}}"
+    ring: {{ $ring }}
+    os: {{ $os }}
+    gui: {{ $gui }}
+    xdg:
+        bin: "{{- joinPath .chezmoi.homeDir $XDG_BIN -}}"
+        cache: "{{- joinPath .chezmoi.homeDir $XDG_CACHE -}}"
+        config: "{{- joinPath .chezmoi.homeDir $XDG_CONFIG -}}"
+        data: "{{- joinPath .chezmoi.homeDir $XDG_DATA -}}"
+        runtime_dir: "{{- joinPath .chezmoi.homeDir $XDG_RUNTIME_DIR -}}"
+        state: "{{- joinPath .chezmoi.homeDir $XDG_STATE -}}"
+        relative:
+            bin: "{{- $XDG_BIN -}}"
+            cache: "{{- $XDG_CACHE -}}"
+            config: "{{- $XDG_CONFIG -}}"
+            data: "{{- $XDG_DATA -}}"
+            runtime_dir: "{{- $XDG_RUNTIME_DIR -}}"
+            state: "{{- $XDG_STATE -}}"
