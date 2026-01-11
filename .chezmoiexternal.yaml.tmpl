@@ -1,0 +1,25 @@
+'{{ .xdg.relative.config }}/.oh-my-zsh':
+    type: 'archive'
+    exact: true
+    refreshPeriod: '168h'
+    stripComponents: 1
+    url: 'https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz'
+
+'{{ .xdg.relative.config }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting':
+    type: 'archive'
+    exact: true
+    refreshPeriod: '168h'
+    stripComponents: 1
+    url: 'https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz'
+
+'{{ .xdg.relative.config }}/.oh-my-zsh/custom/themes/powerlevel10k':
+    type: 'archive'
+    exact: true
+    stripComponents: 1
+    url: 'https://github.com/romkatv/powerlevel10k/archive/v1.15.0.tar.gz'
+
+'{{ .xdg.relative.bin }}/gum':
+    type: 'archive'
+    exact: true
+    stripComponents: 1
+    url: 'https://github.com/charmbracelet/gum/archive/master.tar.gz'
