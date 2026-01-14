@@ -1,5 +1,9 @@
 # Ashi's Dotfiles
 
+These configurations are synced from this repo with [Chezmoi](https://www.chezmoi.io).
+
+## Programs
+
 I bestow unto you the configurations for all the apps I use:
 
 - [ ] [Aseprite](https://www.aseprite.org)
@@ -15,4 +19,8 @@ I bestow unto you the configurations for all the apps I use:
 - [ ] [Vivaldi](https://vivaldi.com)
 - [x] [Zsh](https://www.zsh.org)
 
-These configurations are synced from this repo with [Chezmoi](https://www.chezmoi.io).
+## Installation
+
+To get started, run `./bootstrap.sh`.
+Note that it will only run in a **POSIX-compliant shell environment**.
+For Windows users, this means using [Git BASH](https://gitforwindows.org).
