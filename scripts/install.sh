@@ -4,6 +4,17 @@ OS=$(uname -s | sed 's/^MINGW.*/windows/' | tr '[:upper:]' '[:lower:]')
 ARCH="$(uname -m)"
 TMPDIR=""
 
+# Creates a temporary directory
+temp_create() {
+    # Avoid creating multiple temp dirs
+    if [ -d "$TMPDIR" ]
+    then return
+    fi
+
+    TMPDIR="$(mktemp -d)"
+    echo "Temporary directory created at $TMPDIR"
+}
+
 # Performs cleanup for this script
 cleanup() {
     [ -d "$TMPDIR" ] && rm -rf "$TMPDIR"
@@ -48,9 +59,7 @@ then
     GUM_ARCHIVE="gum_${GUM_VERSION}_${OS}_${ARCH}"
     GUM_URL="https://github.com/charmbracelet/gum/releases/download/v${GUM_VERSION}/${GUM_ARCHIVE}.tar.gz"
     
-    # Make a temporary directory
-    TMPDIR="$(mktemp -d)"
-    echo "Temporary directory created at $TMPDIR"
+    temp_create
 
     # Download and extract Gum
     echo "Downloading Gum from ${GUM_URL}..."
@@ -137,3 +146,18 @@ echo "Configuration Summary:"
 echo "  Security Ring: $RING"
 echo "  Operating System: $OS"
 echo "  GUI Support: $([ $GUI -eq 0 ] && echo "Yes" || echo "No")"
+
+if false # Keep for reference
+then
+
+# Install chezmoi if it's not present
+CHEZMOI=""
+if ! command -v "chezmoi" >/dev/null 2>&1
+then
+    # Determine download URL
+    
+fi
+
+"$CHEZMOI" init --apply git@github.com:frqstbite/dotfiles.git
+
+fi

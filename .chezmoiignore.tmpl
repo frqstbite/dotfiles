@@ -2,6 +2,10 @@
 **/README.md
 **/*.zwc
 
+# Ignore scripts
+scripts/
+
+# Ignore OS-specific directories
 {{ if ne .os "darwin" }}
     Library/
 {{ end }}
