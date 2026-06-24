@@ -1,10 +1,6 @@
--- Pull in the WezTerm API
 local wezterm = require('wezterm')
 
--- Hold the configuration table
 local config = wezterm.config_builder()
-
--- --- VISUALS & THEMES ---
 config.color_scheme = 'Catppuccin Mocha'
 config.font = wezterm.font_with_fallback({
 	'Maple Mono',
@@ -20,7 +16,6 @@ config.window_decorations = "TITLE | RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 
 -- --- WINDOWS SPECIFIC DEFAULTS ---
--- Sets PowerShell as the default shell instead of CMD
 config.default_prog = {
 	'C:\\Windows\\system32\\wsl.exe',
 	'--distribution-id',
@@ -29,5 +24,4 @@ config.default_prog = {
 	'~'
 }
 
--- Return the configuration to WezTerm
 return config
