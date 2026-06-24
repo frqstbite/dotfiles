@@ -1,4 +1,30 @@
+export EDITOR="vim"
+
 # History
 export LESSHISTFILE="$XDG_STATE_HOME/less"
 export NODE_REPL_HISTORY="$XDG_STATE_HOME/node/history"
 export LUNE_REPL_HISTORY="$XDG_STATE_HOME/lune/history"
+
+# PNPM
+export PNPM_HOME="$XDG_DATA_HOME/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# SSH
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+if [ ! -S "$SSH_AUTH_SOCK" ]; then
+    eval $(ssh-agent -a "$SSH_AUTH_SOCK") >/dev/null 2>&1 &
+fi
+
+# GPG
+export GPG_TTY=$(tty)
+gpg-connect-agent updatestartuptty /bye >/dev/null
+
+# Display system info
+if command -v fastfetch &> /dev/null; then
+    fastfetch
+elif command -v neofetch &> /dev/null; then
+    neofetch
+fi

@@ -12,11 +12,8 @@ I bestow unto you the configurations for all the apps I use:
 - [ ] [Blockbench](https://www.blockbench.net)
 - [x] [Git](https://git-scm.com)
 - [ ] [Godot](https://godotengine.org)
-- [ ] [iTerm2](https://iterm2.com)
 - [x] [NeoVim](https://neovim.io)
-- [x] [Oh My Zsh](https://ohmyz.sh)
-- [ ] [Visual Studio Code](https://code.visualstudio.com)
-- [ ] [Vivaldi](https://vivaldi.com)
+- [x] [WezTerm](https://wezterm.org)
 - [x] [Zsh](https://www.zsh.org)
 
 ## Installation
