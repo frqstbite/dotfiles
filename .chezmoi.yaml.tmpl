@@ -77,16 +77,16 @@ data:
     os: {{ $os }}
     gui: {{ $gui }}
     xdg:
-        bin: "{{- joinPath .chezmoi.homeDir $XDG_BIN -}}"
-        cache: "{{- joinPath .chezmoi.homeDir $XDG_CACHE -}}"
-        config: "{{- joinPath .chezmoi.homeDir $XDG_CONFIG -}}"
-        data: "{{- joinPath .chezmoi.homeDir $XDG_DATA -}}"
-        runtime_dir: "{{- joinPath .chezmoi.homeDir $XDG_RUNTIME_DIR -}}"
-        state: "{{- joinPath .chezmoi.homeDir $XDG_STATE -}}"
+        bin: {{ joinPath .chezmoi.homeDir $XDG_BIN | toYaml }}
+        cache: {{ joinPath .chezmoi.homeDir $XDG_CACHE | toYaml }}
+        config: {{ joinPath .chezmoi.homeDir $XDG_CONFIG | toYaml }}
+        data: {{ joinPath .chezmoi.homeDir $XDG_DATA | toYaml }}
+        runtime_dir: {{ joinPath .chezmoi.homeDir $XDG_RUNTIME_DIR | toYaml }}
+        state: {{ joinPath .chezmoi.homeDir $XDG_STATE | toYaml }}
         relative:
-            bin: "{{- $XDG_BIN -}}"
-            cache: "{{- $XDG_CACHE -}}"
-            config: "{{- $XDG_CONFIG -}}"
-            data: "{{- $XDG_DATA -}}"
-            runtime_dir: "{{- $XDG_RUNTIME_DIR -}}"
-            state: "{{- $XDG_STATE -}}"
+            bin: {{- $XDG_BIN | toYaml }}
+            cache: {{- $XDG_CACHE | toYaml }}
+            config: {{- $XDG_CONFIG | toYaml }}
+            data: {{- $XDG_DATA | toYaml }}
+            runtime_dir: {{- $XDG_RUNTIME_DIR | toYaml }}
+            state: {{- $XDG_STATE | toYaml }}

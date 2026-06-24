@@ -22,7 +22,7 @@ config.hide_tab_bar_if_only_one_tab = true
 -- --- WINDOWS SPECIFIC DEFAULTS ---
 -- Sets PowerShell as the default shell instead of CMD
 config.default_prog = {
-	'C:\Windows\system32\wsl.exe',
+	'C:\\Windows\\system32\\wsl.exe',
 	'--distribution-id',
 	'{c12d737a-a570-4232-9d77-f2767ff9f6bf}',
 	'--cd',
