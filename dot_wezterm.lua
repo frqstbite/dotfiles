@@ -1,9 +1,12 @@
 local wezterm = require('wezterm')
 
 local config = wezterm.config_builder()
+--config.allow_square_glyphs_to_overflow_width = "Never"
 config.color_scheme = 'Catppuccin Mocha'
 config.font = wezterm.font_with_fallback({
 	'Maple Mono',
+	'Fira Code',
+	'JetBrains Mono',
 	'Symbols Nerd Font Mono'
 })
 config.font_size = 11.0
