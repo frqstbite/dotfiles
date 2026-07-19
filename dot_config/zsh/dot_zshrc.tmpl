@@ -18,15 +18,15 @@ mkdir -p $ZSH_CONFIG $ZSH_STATE $ZSH_CACHE
 source "$ZSH_CUSTOM/plugins/znap/znap.zsh"
 
 # Core plugins
-znap source jandamm/zsh-interactive-cd
+znap source johannjhang/zsh-interactive-cd
 znap source marlonrichert/zsh-autocomplete
-znap source zsh-users/history-substring-search
-znap source zsh-users/zsh-colored-man-pages
-znap source zsh-users/zsh-navigation-tools
+znap source z-shell/zsh-navigation-tools
+znap source zsh-users/zsh-history-substring-search
 znap source zsh-users/zsh-syntax-highlighting
 
 # OMZ plugins
 znap source ohmyzsh/ohmyzsh plugins/chezmoi
+znap source ohmyzsh/ohmyzsh plugins/colored-man-pages
 znap source ohmyzsh/ohmyzsh plugins/colorize
 znap source ohmyzsh/ohmyzsh plugins/encode64
 znap source ohmyzsh/ohmyzsh plugins/extract
@@ -38,7 +38,6 @@ znap source ohmyzsh/ohmyzsh plugins/gitfast
 znap source ohmyzsh/ohmyzsh plugins/gradle
 znap source ohmyzsh/ohmyzsh plugins/hitokoto
 znap source ohmyzsh/ohmyzsh plugins/node
-znap source ohmyzsh/ohmyzsh plugins/please
 znap source ohmyzsh/ohmyzsh plugins/rust
 znap source ohmyzsh/ohmyzsh plugins/sudo
 znap source ohmyzsh/ohmyzsh plugins/themes
@@ -50,5 +49,20 @@ znap source ohmyzsh/ohmyzsh plugins/themes
 #   export EDITOR='nvim'
 # fi
 
+# LS_COLORS
+znap eval trapd00r/LS_COLORS "$(whence -a dircolors gdircolors) -b LS_COLORS"
+
+# zcolors
+znap source marlonrichert/zcolors
+znap eval marlonrichert/zcolors "zcolors ${(q)LS_COLORS}"
+
+# Activate
+eval "$(mise activate zsh)"
+
 # Auto-complete
-source <(pnpm completion zsh)
+eval "$(mise completion zsh)"
+eval "$(pnpm completion zsh)"
+
+# Prompt
+znap eval starship 'starship init zsh --print-full-init'
+znap prompt

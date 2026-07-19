@@ -6,3 +6,62 @@
         editor = vim
 [init]
         defaultBranch = main
+[color "status"]
+	branch = normal
+	added = normal bold
+	updated = normal bold
+	localbranch = normal
+	changed = 0 3
+	header = normal
+	remotebranch = 6 normal
+	nobranch = normal bold
+	unmerged = normal 8 bold italic
+	untracked = 8 normal
+[color "branch"]
+	plain = normal
+	remote = 6 normal
+	current = normal bold
+	local = normal
+	upstream = 6 normal
+[color "remote"]
+	hint = 8 normal
+	success = normal bold
+	error = normal 8 bold italic
+	warning = 0 3
+[color "interactive"]
+	header = 8 normal bold
+	prompt = normal bold
+	help = 8 normal
+	error = normal 8 bold italic
+[color "diff"]
+	commit = normal
+	newMoved = 11 0
+	oldMovedAlternativeDimmed = 6 0 dim
+	frag = 8 normal
+	oldMovedAlternative = 6 0
+	contextBold = normal bold
+	newBold = 10 0 bold
+	context = normal
+	contextDimmed = normal dim
+	oldMoved = 3 0
+	oldBold = 1 0 bold
+	newMovedDimmed = 11 normal
+	func = 8 normal
+	meta = 8 normal
+	newDimmed = 10 normal
+	newMovedAlternative = 14 0
+	new = 10 0
+	newMovedAlternativeDimmed = 11 normal
+	whitespace = normal 3
+	oldMovedDimmed = 3 0 dim
+	oldDimmed = 1 0 dim
+	old = 1 0
+[color "decorate"]
+	branch = normal
+	tag = normal
+	remotebranch = 6 normal
+	stash = normal
+	grafted = normal bold
+	HEAD = normal italic
+[diff]
+	colorMoved = dimmed-zebra
