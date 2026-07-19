@@ -9,10 +9,9 @@
 #umask 022
 
 # PATH
-[ -d "$HOME/.local/bin" ] && PATH="$PATH:$HOME/.local/bin" # User's private bin
-[ -f "$HOME/.rokit/env" ] && . "$HOME/.rokit/env"          # Rokit
+[ -d "$HOME/.local/bin" ] && PATH="$PATH:$HOME/.local/bin" # User-specific bin
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"          # Cargo
-export PATH="$PATH:$HOME/.pesde/bin"                       # Pesde
+[ -d "$HOME/.pesde/bin" ] && PATH="$PATH:$HOME/.pesde/bin" # Pesde
 export PATH
 
 # SSH and GPG
