@@ -11,6 +11,18 @@ export ZSH_CUSTOM="$ZSH_CONFIG/custom"
 export ZSH_STATE="${XDG_STATE_HOME:-{{ .xdg.state }}}/zsh"
 mkdir -p $ZSH_CONFIG $ZSH_STATE $ZSH_CACHE
 
+# Separate options into clean categories (like modified files vs untracked files)
+zstyle ':completion:*' group-name ''
+
+# Label those categories cleanly using descriptions provided by Git and SSH
+zstyle ':completion:*:descriptions' format $'%B%F{7}%K{8} %d %k%f%b%F{8}🭬%f'
+
+# Hide generic options if a specific file type is expected (like matching private keys for SSH)
+zstyle ':completion:*' file-patterns '%p:globbed-files' '*:all-files'
+
+# Let the Arrow Keys navigate through the categories natively
+zstyle ':completion:*' menu select
+
 # Download and source Znap, if it's not there yet.
 [[ -r "$ZSH_CUSTOM/plugins/znap/znap.zsh" ]] ||
     git clone --depth 1 -- \
@@ -19,8 +31,8 @@ source "$ZSH_CUSTOM/plugins/znap/znap.zsh"
 
 # Core plugins
 znap source johannjhang/zsh-interactive-cd
-znap source marlonrichert/zsh-autocomplete
 znap source z-shell/zsh-navigation-tools
+znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-history-substring-search
 znap source zsh-users/zsh-syntax-highlighting
 
