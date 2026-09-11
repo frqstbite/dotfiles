@@ -52,10 +52,6 @@ znap source ohmyzsh/ohmyzsh plugins/themes
 # LS_COLORS
 znap eval trapd00r/LS_COLORS "$(whence -a dircolors gdircolors) -b LS_COLORS"
 
-# zcolors
-znap source marlonrichert/zcolors
-znap eval marlonrichert/zcolors "zcolors ${(q)LS_COLORS}"
-
 # Activate
 eval "$(mise activate zsh)"
 
