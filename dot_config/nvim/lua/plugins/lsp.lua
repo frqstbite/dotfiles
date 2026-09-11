@@ -26,7 +26,7 @@ return {
 			'rust_analyzer',
 			'spyglassmc_language_server',
 			'stylua',
-			'systemd_ls',
+			'systemd_lsp',
 			'ts_ls',
 			'vue_ls',
 			'yamlls',
