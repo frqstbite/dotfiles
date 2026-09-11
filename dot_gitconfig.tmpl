@@ -1,0 +1,22 @@
+[core]
+    editor = "nvim"
+    pager = "delta"
+
+[init]
+    defaultBranch = main
+
+[diff]
+    colorMoved = dimmed-zebra
+
+# Git LFS
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+# Delta
+[include]
+	path = "{{ .xdg.config }}/delta/themes/catppuccin.gitconfig"
+[delta]
+	features = catppuccin-<flavour>

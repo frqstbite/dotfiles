@@ -10,6 +10,7 @@ I bestow unto you the configurations for all the apps I use:
 - [x] [Bash](https://www.gnu.org/software/bash)
 - [ ] [Blender](https://www.blender.org)
 - [ ] [Blockbench](https://www.blockbench.net)
+- [x] [Delta](https://dandavison.github.io/delta)
 - [x] [Git](https://git-scm.com)
 - [ ] [Godot](https://godotengine.org)
 - [x] [Kitty](https://sw.kovidgoyal.net/kitty)
