@@ -1,15 +1,11 @@
-# Ignore README
-**/README.md
-**/*.zwc
+# READMEs
+README.md
 
-# Ignore scripts
-scripts/
-
-# Ignore OS-specific directories
+# OS-specific
 {{ if ne .os "darwin" }}
-    Library/
+Library/
 {{ end }}
 
 {{ if ne .os "windows" }}
-    AppData/
+AppData/
 {{ end }}
