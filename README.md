@@ -12,9 +12,9 @@ I bestow unto you the configurations for all the apps I use:
 - [ ] [Blockbench](https://www.blockbench.net)
 - [x] [Git](https://git-scm.com)
 - [ ] [Godot](https://godotengine.org)
+- [x] [Kitty](https://sw.kovidgoyal.net/kitty)
 - [x] [NeoVim](https://neovim.io)
 - [x] [Starship](https://starship.rs)
-- [x] [WezTerm](https://wezterm.org)
 - [x] [Zsh](https://www.zsh.org)
 
 ## Installation
