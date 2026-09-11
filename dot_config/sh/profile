@@ -11,7 +11,6 @@
 # PATH
 [ -d "$HOME/.local/bin" ] && PATH="$PATH:$HOME/.local/bin" # User-specific bin
 [ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"          # Cargo
-[ -d "$HOME/.pesde/bin" ] && PATH="$PATH:$HOME/.pesde/bin" # Pesde
 export PATH
 
 # SSH and GPG
