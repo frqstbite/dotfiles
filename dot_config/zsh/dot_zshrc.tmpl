@@ -60,8 +60,11 @@ znap eval marlonrichert/zcolors "zcolors ${(q)LS_COLORS}"
 eval "$(mise activate zsh)"
 
 # Auto-complete
-eval "$(mise completion zsh)"
-eval "$(pnpm completion zsh)"
+znap fpath _brew 'cat $(brew --prefix)/share/zsh/site-functions/_brew'
+znap fpath _cargo 'rustup completions zsh cargo'
+znap fpath _mise 'mise completion zsh'
+znap fpath _pnpm 'pnpm completion zsh'
+znap fpath _rustup 'rustup completions zsh'
 
 # Prompt
 znap eval starship 'starship init zsh --print-full-init'
