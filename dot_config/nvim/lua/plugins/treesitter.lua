@@ -1,12 +1,13 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
 	name = 'treesitter',
-	branch = 'master',
+    branch = 'main',
 	lazy = false,
 	build = ':TSUpdate',
 	opts = {
 		-- A list of parser names, or 'all' (the listed parsers MUST always be installed)
 		ensure_installed = {
+            'asm',
 			'astro',
 			'bash',
 			'c',
